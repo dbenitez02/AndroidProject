@@ -12,10 +12,7 @@
         android:theme="@style/Theme.BudgetTracker"
         tools:targetApi="31">
         <activity
-            android:name=".LoginActivity"
-            android:exported="false" />
-        <activity
-            android:name=".SignUpActivity"
+            android:name=".TransactionFormActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

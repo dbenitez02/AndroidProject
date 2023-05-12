@@ -11,4 +11,9 @@
     <string name="first_name">First Name:</string>
     <string name="last_name">Last Name:</string>
     <string name="enter_your_email">Enter your Email:</string>
+    <string name="ex_50">Ex: 50</string>
+    <string name="ex_groceries">Ex: Groceries</string>
+    <string name="submit">submit</string>
+    <string name="description">Description:</string>
+    <string name="amount">Amount:</string>
 </resources>
