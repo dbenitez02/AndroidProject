@@ -4,7 +4,7 @@
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="transactions">Transactions</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="add_transaction">Add transaction</string>
     <string name="create_a_new_account">Create a new Account</string>
@@ -16,4 +16,10 @@
     <string name="submit">submit</string>
     <string name="description">Description:</string>
     <string name="amount">Amount:</string>
+    <string name="delete">delete</string>
+    <string name="help">Help</string>
+    <string name="adding_a_transaction">Adding a Transaction</string>
+    <string name="description_1">To add a transaction. Simply click the \'+\' to start enter details then click back to go back to your transaction list.</string>
+    <string name="deleting_a_transaction">Deleting a transaction</string>
+    <string name="description_2">To delete a transaction,tap and hold on a transaction you would like to delete and select delete.</string>
 </resources>

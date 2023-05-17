@@ -1,12 +1,15 @@
 package com.example.budgettracker.repo;
 
+import androidx.lifecycle.LiveData;
 import android.content.Context;
+import androidx.room.Room;
 import com.example.budgettracker.model.Transaction;
 import java.util.*;
 
 public class TransactionRepository {
+
     private static TransactionRepository mTransactionRepo;
-    private final List<Transaction> mTransactionList;
+    private final TransactionDAO mTransactionDAO;
 
     public static TransactionRepository getInstance(Context context) {
         if (mTransactionRepo == null) {
@@ -17,9 +20,14 @@ public class TransactionRepository {
     }
 
     private TransactionRepository(Context context) {
-        mTransactionList = new ArrayList<>();
+        TransactionDatabase database = Room.databaseBuilder(context, TransactionDatabase.class, "transactions.db")
+                                        .allowMainThreadQueries()
+                                        .build();
+        mTransactionDAO = database.transactionDAO();
 
-        addStarterData();
+        if(mTransactionDAO.getTransactions() == null) {
+            addStarterData();
+        }
     }
 
     private void addStarterData() {
@@ -44,21 +52,20 @@ public class TransactionRepository {
     }
 
     public void addTransaction(Transaction transaction) {
-        mTransactionList.add(transaction);
+        long transactionId = mTransactionDAO.addTransaction(transaction);
+        transaction.setTransactionID(transactionId);
     }
 
-    public Transaction getTransaction(long transactionID) {
-        for (Transaction transaction : mTransactionList) {
-            if (transaction.getTransactionID() == transactionID) {
-                return transaction;
-            }
-        }
-
-        return null;
+    public LiveData<Transaction> getTransaction(long transactionID) {
+        return mTransactionDAO.getTransaction(transactionID);
     }
 
-    public List<Transaction> getTransactions() {
-        return mTransactionList;
+    public LiveData<List<Transaction>> getTransactions() {
+        return mTransactionDAO.getTransactions();
+    }
+
+    public void deleteTransaction(Transaction transaction) {
+        mTransactionDAO.deleteTransaction(transaction);
     }
 
 

@@ -9,11 +9,18 @@ import androidx.room.PrimaryKey;
 import static androidx.room.ForeignKey.CASCADE;
 
 
-
+@Entity
 public class Transaction {
 
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name="id")
     private long transactionID;
+
+    @NonNull
+    @ColumnInfo(name = "amount_spent")
     private float amountSpent;
+
+    @ColumnInfo(name = "description")
     private String description;
 
     public long getTransactionID() {
@@ -25,23 +32,19 @@ public class Transaction {
     }
 
     public void setAmountSpent(float amount) {
-
         amountSpent = amount;
     }
 
     public float getAmountSpent() {
-
         return amountSpent;
     }
 
     public void setDescription(@NonNull String des) {
-
         description = des;
     }
 
     @NonNull
     public String getDescription() {
-
         return description;
     }
 
