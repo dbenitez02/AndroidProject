@@ -56,9 +56,9 @@ public class TransactionRepository {
         transaction.setTransactionID(transactionId);
     }
 
-    public LiveData<Transaction> getTransaction(long transactionID) {
-        return mTransactionDAO.getTransaction(transactionID);
-    }
+//    public LiveData<Transaction> getTransaction(long transactionID) {
+//        return mTransactionDAO.getTransaction(transactionID);
+//    }
 
     public LiveData<List<Transaction>> getTransactions() {
         return mTransactionDAO.getTransactions();

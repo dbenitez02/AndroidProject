@@ -36,9 +36,10 @@ public class MainActivity extends AppCompatActivity {
 
     private TransactionAdapter mTransactionAdapter;
     private RecyclerView mRecyclerView;
-    private TransactionListViewModel mTransactionViewModel;
+    private TransactionListViewModel mTransactionListViewModel;
     private Transaction mSelectedTransaction;
-    private Transaction mTransaction;
+
+    private List<Transaction> mTransactionList;
 
     private int mSelectedPosition = RecyclerView.NO_POSITION;
     private ActionMode mActionMode = null;
@@ -62,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
         mRecyclerView = findViewById(R.id.recycler_view);
         RecyclerView.LayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         mRecyclerView.setLayoutManager(linearLayoutManager);
+
+        mTransactionAdapter = new TransactionAdapter(mTransactionList);
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,6 +130,7 @@ public class MainActivity extends AppCompatActivity {
             mSelectedTransaction = mTransaction;
             mSelectedPosition = getAbsoluteAdapterPosition();
 
+
             // Rebind selected item
             mTransactionAdapter.notifyItemChanged(mSelectedPosition);
 
@@ -139,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Action Callback
+     * Action Callback to delete a transaction using context menu.
      */
     private final ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
         @Override
@@ -158,12 +162,14 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
+
             // Process action
             if(menuItem.getItemId() == R.id.delete) {
                 mLoadTransactionList = false;
 
+
                 // Delete from ViewModel
-                mTransactionViewModel.deleteTransaction(mSelectedTransaction);
+                mTransactionListViewModel.deleteTransaction(mSelectedTransaction);
 
                 // Remove from RecyclerView
                 mTransactionAdapter.removeTransaction(mSelectedTransaction);
