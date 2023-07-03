@@ -49,7 +49,7 @@ public class Transaction {
     }
 
     public String getText() {
-        return description + "\n" +
+        return  description + "\n" +
                 "Amount spent: " + amountSpent + "\n" +
                 "ID: " + transactionID;
     }

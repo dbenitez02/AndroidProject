@@ -11,21 +11,26 @@ public class TransactionListViewModel extends AndroidViewModel {
 
     private final TransactionRepository transactionRepo;
 
+    // Constructor
     public TransactionListViewModel(Application application) {
         super(application);
         transactionRepo = TransactionRepository.getInstance(application.getApplicationContext());
     }
 
+    // Get all transactions in the database.
     public LiveData<List<Transaction>> getTransactions() {
-
         return transactionRepo.getTransactions();
     }
 
     public void addTransaction(Transaction transaction) {
-        transactionRepo.addTransaction(transaction);
+        transactionRepo.insert(transaction);
+    }
+
+    public void updateTransaction(Transaction transaction) {
+        transactionRepo.update(transaction);
     }
 
     public void deleteTransaction(Transaction transaction) {
-        transactionRepo.deleteTransaction(transaction);
+        transactionRepo.delete(transaction);
     }
 }

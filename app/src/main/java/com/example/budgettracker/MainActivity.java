@@ -58,12 +58,12 @@ public class MainActivity extends AppCompatActivity {
         Button btnHelp = findViewById(R.id.btnHelp);
 
 
-        // Right here we will implement all the database nonsense
-
+        // Setting up the RecyclerView to list transactions.
         mRecyclerView = findViewById(R.id.recycler_view);
         RecyclerView.LayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         mRecyclerView.setLayoutManager(linearLayoutManager);
 
+        // Initializing the Transaction Adapter.
         mTransactionAdapter = new TransactionAdapter(mTransactionList);
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
@@ -167,8 +167,9 @@ public class MainActivity extends AppCompatActivity {
             if(menuItem.getItemId() == R.id.delete) {
                 mLoadTransactionList = false;
 
+                Log.d("Debugging delete ", mSelectedTransaction.getText());
 
-                // Delete from ViewModel
+                // Delete from the database
                 mTransactionListViewModel.deleteTransaction(mSelectedTransaction);
 
                 // Remove from RecyclerView
